@@ -74,35 +74,37 @@ year.addEventListener("input", () =>{
       }
   });
 
+
+
+month.addEventListener("blur", function(event) {
+    let month = event.target.value;
+    if (month.length === 1 && month !== '0') {
+      month = '0' + month;
+    }
+    event.target.value = month;
+    if(month.length !== 0){
+        card_month.textContent = month + "/" ;
+    }
+  })
+
 //tvis shemowmeba
 month.addEventListener("input", (event) => {
     event.preventDefault();
     var monthValue = month.value;
     var monthNumber = Number(monthValue);
 
-   
-    if(!isNaN(monthNumber) && monthValue.length === 2 || monthValue.length === 1 && monthNumber >= 1 && monthNumber <= 12){
+
+    if(!isNaN(monthNumber) && (monthValue.length === 2 || monthValue.length === 1) && monthNumber >= 1 && monthNumber <= 12){
         wrong_year.style.display = "none";
         month.style.borderColor = "rgba(223, 222, 224, 1)";
-        
-        var formattedMonth = monthValue.padStart(2, '0');
-        card_month.textContent = monthNumber + "/" ;
-        month.value = formattedMonth;
-        
-        // if(monthValue.length === 2){
-        //     month.value = monthValue;
-        //   }else if(monthValue.length === 1){
-        //         month.textContent = "0" + monthValue;
-        //   }
-
+  
         valid_month = true;
         return true;
-
       }
       else{
         month.style.borderColor = "red";
         wrong_year.style.display = "flex";
-        card_month.textContent = "00 /";
+        card_month.textContent = "00/";
         valid_month = false;
         return false;
 
@@ -123,7 +125,7 @@ cv.addEventListener("input", (event) => {
         wrong_cv.style.display = "none";
         cv.style.borderColor = "rgba(223, 222, 224, 1)";
         cv.value = formattedCv;
-        card_cv.textContent = cvNumber;
+        card_cv.textContent = cvValue;
         valid_cv = true;
         return true;
       }
